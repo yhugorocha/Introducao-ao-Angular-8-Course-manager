@@ -1,22 +1,32 @@
+import { CourseModule } from './courses/course.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { CoursesComponent } from './courses/courses.component';
-import { StarComponent } from './star/star.component';
-//import { CourseListComponent } from './cousers/course-list.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { Erro404Component } from './erro404/erro404.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,
-    StarComponent
+    NavBarComponent,
+    Erro404Component
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    HttpClientModule,
+    CourseModule,
+    RouterModule.forRoot([
+      {
+        path: '', redirectTo: 'Courses', pathMatch: 'full'
+      },
+      {
+        path: '**', component: Erro404Component
+      },
+    ])
 
   ],
   providers: [],
